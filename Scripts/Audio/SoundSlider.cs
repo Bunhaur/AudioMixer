@@ -5,9 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class SoundSlider : MonoBehaviour
 {
-    private const float _minValue = 0.0001f;
-    private const float _maxValue = 1f;
-    private const float _logMultiplier = 20;
+    private const float MinValue = 0.0001f;
+    private const float MaxValue = 1f;
+    private const float LogMultiplier = 20;
 
     [SerializeField] private AudioMixerGroup _mixerGroup;
 
@@ -32,13 +32,13 @@ public class SoundSlider : MonoBehaviour
 
     public void ChangeVolume(float value)
     {
-        _mixerGroup.audioMixer.SetFloat(_groupName, Mathf.Log10(value) * _logMultiplier);
+        _mixerGroup.audioMixer.SetFloat(_groupName, Mathf.Log10(value) * LogMultiplier);
     }
 
     private void Init()
     {
-        _slider.minValue = _minValue;
-        _slider.maxValue = _maxValue;
+        _slider.minValue = MinValue;
+        _slider.maxValue = MaxValue;
         _slider.value = _slider.maxValue;
         _groupName = _mixerGroup.name;
     }
