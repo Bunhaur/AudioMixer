@@ -12,6 +12,7 @@ public class SoundSlider : MonoBehaviour
     [SerializeField] private AudioMixerGroup _mixerGroup;
 
     private Slider _slider;
+    private float _convertValue;
     private string _groupName;
 
     private void Awake()
@@ -22,24 +23,31 @@ public class SoundSlider : MonoBehaviour
 
     private void OnEnable()
     {
-        _slider.onValueChanged.AddListener(ChangeVolume);
+        _slider.onValueChanged.AddListener(ChangeValue);
     }
 
     private void OnDisable()
     {
-        _slider.onValueChanged.RemoveListener(ChangeVolume);
-    }
-
-    public void ChangeVolume(float value)
-    {
-        _mixerGroup.audioMixer.SetFloat(_groupName, Mathf.Log10(value) * LogMultiplier);
+        _slider.onValueChanged.RemoveListener(ChangeValue);
     }
 
     private void Init()
     {
         _slider.minValue = MinValue;
         _slider.maxValue = MaxValue;
-        _slider.value = _slider.maxValue;
         _groupName = _mixerGroup.name;
+
+        if (PlayerPrefs.HasKey(_groupName))
+            _slider.value = SettingSaver.GetSaveValue(_groupName);
+
+        ChangeValue(_slider.value);
+    }
+
+    private void ChangeValue(float value)
+    {
+        _convertValue = Mathf.Log10(value) * LogMultiplier;
+        _mixerGroup.audioMixer.SetFloat(_groupName, _convertValue);
+
+        SettingSaver.SaveValue(_groupName, _slider.value);
     }
 }

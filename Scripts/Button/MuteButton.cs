@@ -1,29 +1,39 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class MuteButton : MonoBehaviour
 {
-    private const string MixerMasterName = "Master";
-    private const float MinValue = -80f;
-    private const float MaxValue = 0f;
+    private const float MinValue = 0;
+    private const float MaxValue = 1;
 
-    [SerializeField] private AudioMixerGroup _master;
     [SerializeField] private AudioMixer _mixer;
 
-    private float _volume;
+    private Button _button;
 
-    public void MuteUnmuteAllSounds()
+    private void Awake()
     {
-        _mixer.GetFloat(MixerMasterName, out _volume);
-
-        if (_volume > MinValue)
-            ChangeValue(MinValue);
-        else if (_volume < MaxValue)
-            ChangeValue(MaxValue);
+        _button = GetComponent<Button>();
     }
 
-    private void ChangeValue(float value)
+    private void OnEnable()
     {
-        _master.audioMixer.SetFloat(MixerMasterName, value);
+        _button.onClick.AddListener(Mute);
+    }
+
+    private void OnDisable()
+    {
+        _button.onClick.RemoveListener(Mute);
+    }
+
+    private void Mute()
+    {
+        SettingSaver.ChangeAndSaveMuteValue();
+
+        if (SettingSaver.IsMute())
+            AudioListener.volume = MinValue;
+        else
+            AudioListener.volume = MaxValue;
     }
 }
