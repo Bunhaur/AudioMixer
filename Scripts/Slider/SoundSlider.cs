@@ -38,7 +38,7 @@ public class SoundSlider : MonoBehaviour
         _groupName = _mixerGroup.name;
 
         if (PlayerPrefs.HasKey(_groupName))
-            _slider.value = SettingSaver.GetSaveValue(_groupName);
+            _slider.value = SettingsSaver.GetSaveValue(_groupName);
 
         ChangeValue(_slider.value);
     }
@@ -48,6 +48,6 @@ public class SoundSlider : MonoBehaviour
         _convertValue = Mathf.Log10(value) * LogMultiplier;
         _mixerGroup.audioMixer.SetFloat(_groupName, _convertValue);
 
-        SettingSaver.SaveValue(_groupName, _slider.value);
+        SettingsSaver.SaveValue(_groupName, _slider.value);
     }
 }

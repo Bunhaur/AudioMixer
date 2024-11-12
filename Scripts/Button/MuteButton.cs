@@ -27,9 +27,9 @@ public class MuteButton : MonoBehaviour
 
     private void Mute()
     {
-        SettingSaver.ChangeAndSaveMuteValue(MuteSaveName, MuteValue, UnmuteValue);
+        SettingsSaver.ChangeAndSaveMuteValue(MuteSaveName, MuteValue, UnmuteValue);
 
-        if (SettingSaver.IsMute(MuteSaveName, MuteValue))
+        if (SettingsSaver.IsMute(MuteSaveName, MuteValue))
             AudioListener.volume = UnmuteValue;
         else
             AudioListener.volume = MuteValue;

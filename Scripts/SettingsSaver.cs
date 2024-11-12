@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class SettingSaver
+public static class SettingsSaver
 {
     public static void SaveValue(string groupName, float value)
     {
