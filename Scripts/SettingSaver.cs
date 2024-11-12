@@ -2,10 +2,6 @@ using UnityEngine;
 
 public static class SettingSaver
 {
-    private const string SaveMuteName = "Mute";
-    private const int ValueMute = 1;
-    private const int ValueUnmute = 0;
-
     public static void SaveValue(string groupName, float value)
     {
         PlayerPrefs.SetFloat(groupName, value);
@@ -21,16 +17,16 @@ public static class SettingSaver
         return PlayerPrefs.GetFloat(groupName);
     }
 
-    public static void ChangeAndSaveMuteValue()
+    public static void ChangeAndSaveMuteValue(string saveMuteName, float muteValue, float unmuteValue)
     {
-        if (PlayerPrefs.GetInt(SaveMuteName) == ValueMute)
-            PlayerPrefs.SetInt(SaveMuteName, ValueUnmute);
+        if (PlayerPrefs.GetFloat(saveMuteName) == muteValue)
+            PlayerPrefs.SetFloat(saveMuteName, unmuteValue);
         else
-            PlayerPrefs.SetInt(SaveMuteName, ValueMute);
+            PlayerPrefs.SetFloat(saveMuteName, muteValue);
     }
 
-    public static bool IsMute()
+    public static bool IsMute(string saveMuteName, float muteValue)
     {
-        return PlayerPrefs.GetInt(SaveMuteName) == ValueMute;
+        return PlayerPrefs.GetFloat(saveMuteName) == muteValue;
     }
 }

@@ -1,14 +1,12 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class MuteButton : MonoBehaviour
 {
-    private const float MinValue = 0;
-    private const float MaxValue = 1;
-
-    [SerializeField] private AudioMixer _mixer;
+    private const string MuteSaveName = "Mute";
+    private const float MuteValue = 1;
+    private const float UnmuteValue = 0;
 
     private Button _button;
 
@@ -29,11 +27,11 @@ public class MuteButton : MonoBehaviour
 
     private void Mute()
     {
-        SettingSaver.ChangeAndSaveMuteValue();
+        SettingSaver.ChangeAndSaveMuteValue(MuteSaveName, MuteValue, UnmuteValue);
 
-        if (SettingSaver.IsMute())
-            AudioListener.volume = MinValue;
+        if (SettingSaver.IsMute(MuteSaveName, MuteValue))
+            AudioListener.volume = UnmuteValue;
         else
-            AudioListener.volume = MaxValue;
+            AudioListener.volume = MuteValue;
     }
 }
