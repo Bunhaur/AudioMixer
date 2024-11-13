@@ -37,7 +37,7 @@ public class SoundSlider : MonoBehaviour
         _slider.maxValue = MaxValue;
         _groupName = _mixerGroup.name;
 
-        if (PlayerPrefs.HasKey(_groupName))
+        if (SettingsSaver.HaveSave(_groupName))
             _slider.value = SettingsSaver.GetSaveValue(_groupName);
 
         ChangeValue(_slider.value);

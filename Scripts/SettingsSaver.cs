@@ -7,11 +7,6 @@ public static class SettingsSaver
         PlayerPrefs.SetFloat(groupName, value);
     }
 
-    public static void SaveValue(string groupName, int value)
-    {
-        PlayerPrefs.SetInt(groupName, value);
-    }
-
     public static float GetSaveValue(string groupName)
     {
         return PlayerPrefs.GetFloat(groupName);
@@ -28,5 +23,10 @@ public static class SettingsSaver
     public static bool IsMute(string saveMuteName, float muteValue)
     {
         return PlayerPrefs.GetFloat(saveMuteName) == muteValue;
+    }
+
+    public static bool HaveSave(string groupName)
+    {
+        return PlayerPrefs.HasKey(groupName);
     }
 }
