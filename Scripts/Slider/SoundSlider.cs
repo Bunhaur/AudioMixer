@@ -18,6 +18,7 @@ public class SoundSlider : MonoBehaviour
     private void Awake()
     {
         _slider = GetComponent<Slider>();
+
         Init();
     }
 

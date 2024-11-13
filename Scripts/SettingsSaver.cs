@@ -12,14 +12,6 @@ public static class SettingsSaver
         return PlayerPrefs.GetFloat(groupName);
     }
 
-    public static void ChangeAndSaveMuteValue(string saveMuteName, float muteValue, float unmuteValue)
-    {
-        if (PlayerPrefs.GetFloat(saveMuteName) == muteValue)
-            PlayerPrefs.SetFloat(saveMuteName, unmuteValue);
-        else
-            PlayerPrefs.SetFloat(saveMuteName, muteValue);
-    }
-
     public static bool IsMute(string saveMuteName, float muteValue)
     {
         return PlayerPrefs.GetFloat(saveMuteName) == muteValue;
